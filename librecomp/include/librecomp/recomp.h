@@ -259,6 +259,8 @@ extern "C" {
 
 void cop0_status_write(recomp_context* ctx, gpr value);
 gpr cop0_status_read(recomp_context* ctx);
+void cop0_entryhi_write(recomp_context* ctx, gpr value);
+gpr cop0_entryhi_write(recomp_context* ctx);
 void switch_error(const char* func, uint32_t vram, uint32_t jtbl);
 void do_break(uint32_t vram);
 

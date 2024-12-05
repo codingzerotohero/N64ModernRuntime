@@ -364,8 +364,6 @@ recomp::mods::NativeCodeHandle::NativeCodeHandle(const std::filesystem::path& dl
     is_good &= dynamic_lib->get_dll_symbol(cop0_status_read, "cop0_status_read");
     is_good &= dynamic_lib->get_dll_symbol(cop0_entryhi_read, "cop0_entryhi_read");
     is_good &= dynamic_lib->get_dll_symbol(cop0_entryhi_write, "cop0_entryhi_write");
-    is_good &= dynamic_lib->get_dll_symbol(cop0_entrylo_read, "cop0_entrylo_read")
-    is_good &= dynamic_lib->get_dll_symbol(cop0_entrylo_write, "cop0_entrylo_write")
     is_good &= dynamic_lib->get_dll_symbol(switch_error, "switch_error");
     is_good &= dynamic_lib->get_dll_symbol(do_break, "do_break");
     is_good &= dynamic_lib->get_dll_symbol(reference_section_addresses, "reference_section_addresses");
@@ -1064,6 +1062,8 @@ recomp::mods::CodeModLoadError recomp::mods::ModContext::resolve_code_dependenci
     mod.code_handle->set_get_function_pointer(get_function);
     mod.code_handle->set_cop0_status_write_pointer(cop0_status_write);
     mod.code_handle->set_cop0_status_read_pointer(cop0_status_read);
+    mod.code_handle->set_cop0_entryhi_write_pointer(cop0_entryhi_write);
+    mod.code_handle->set_cop0_entryhi_read_pointer(cop0_entryhi_read);
     mod.code_handle->set_switch_error_pointer(switch_error);
     mod.code_handle->set_do_break_pointer(do_break);
     mod.code_handle->set_reference_section_addresses_pointer(section_addresses);
