@@ -245,6 +245,7 @@ typedef struct {
     uint64_t hi, lo;
     uint32_t* f_odd;
     uint32_t status_reg;
+    uint32_t entryhi_reg;
     uint8_t mips3_float_mode;
 } recomp_context;
 

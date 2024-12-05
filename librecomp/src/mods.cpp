@@ -362,6 +362,10 @@ recomp::mods::NativeCodeHandle::NativeCodeHandle(const std::filesystem::path& dl
     is_good &= dynamic_lib->get_dll_symbol(get_function, "get_function");
     is_good &= dynamic_lib->get_dll_symbol(cop0_status_write, "cop0_status_write");
     is_good &= dynamic_lib->get_dll_symbol(cop0_status_read, "cop0_status_read");
+    is_good &= dynamic_lib->get_dll_symbol(cop0_entryhi_read, "cop0_entryhi_read");
+    is_good &= dynamic_lib->get_dll_symbol(cop0_entryhi_write, "cop0_entryhi_write");
+    is_good &= dynamic_lib->get_dll_symbol(cop0_entrylo_read, "cop0_entrylo_read")
+    is_good &= dynamic_lib->get_dll_symbol(cop0_entrylo_write, "cop0_entrylo_write")
     is_good &= dynamic_lib->get_dll_symbol(switch_error, "switch_error");
     is_good &= dynamic_lib->get_dll_symbol(do_break, "do_break");
     is_good &= dynamic_lib->get_dll_symbol(reference_section_addresses, "reference_section_addresses");

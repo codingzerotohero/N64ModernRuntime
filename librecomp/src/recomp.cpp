@@ -408,6 +408,34 @@ extern "C" gpr cop0_status_read(recomp_context* ctx) {
     return (gpr)(int32_t)ctx->status_reg;
 }
 
+#define ENTRYHI_VPN_MASK  0xFFFFE000 // Bits 31–13
+#define ENTRYHI_ASID_MASK 0x000000FF // Bits 7–0
+
+extern "C" void cop0_entryhi_write(recomp_context* ctx, gpr value){
+    uint32_t old_entryhi = ctx->entryhi_reg;
+    uint32_t new_entryhi = (uint32_t)value;
+    uint32_t changed = old_entryhi ^ new_entryhi;
+
+    new_entryhi &= ENTRYHI_VPN_MASK;
+
+    uint32_t asid = new_entryhi & ENTRYHI_ASID_MASK;
+    if(asid > 255){
+        printf("Invalid ASID value");
+        assert(false);
+        exit(EXIT_FAILURE)
+    }
+    if(changed){
+        printf("EntryHi updated: Old=0x%08X, New=0x%08X, VPN Changed=0x%08X, ASID=0x%02X\n",
+               old_entryhi, new_entryhi, (changed & vpn_mask), asid);
+    }
+
+    ctx->entryhi_reg = new_entryhi;
+}
+
+extern "C" gpr cop0_entryhi_read(recomp_context* ctx){
+    return (gpr)(int32_t)ctx->entryhi_reg;
+}
+
 extern "C" void switch_error(const char* func, uint32_t vram, uint32_t jtbl) {
     printf("Switch-case out of bounds in %s at 0x%08X for jump table at 0x%08X\n", func, vram, jtbl);
     assert(false);
